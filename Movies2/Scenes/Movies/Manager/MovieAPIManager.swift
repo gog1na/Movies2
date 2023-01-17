@@ -39,7 +39,9 @@ protocol MovieAPIManagerProtocol {
 class MovieAPIManager: MovieAPIManagerProtocol {
     func fetchMovies(with category: MovieCategory, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
         let urlString = "https://api.themoviedb.org/3/movie/\(category.queryParam)?api_key=b05b465c55ad91f6a57956826ab95df9"
+     
         guard let url = URL(string: urlString) else  {return}
+        
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))
